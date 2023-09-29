@@ -2,7 +2,7 @@ from scipy.stats import friedmanchisquare
 import pandas as pd
 import scikit_posthocs as sp
 
-data1 = [
+clonalg_avg_values = [
     2.38261E-01,
     1.25806E-01,
     -1.00000E+08,
@@ -14,7 +14,7 @@ data1 = [
     9.36057E+01,
     2.13307E+01
 ]
-data2 = [
+abc_avg_values = [
     7.54952E-15,
     4.05812E-06,
     -1.00000E+08,
@@ -26,7 +26,7 @@ data2 = [
     6.29153E-01,
     4.05030E-01
 ]
-data3 = [
+ba_avg_values = [
     1.71720E+01,
     2.18870E+00,
     -9.99822E+07,
@@ -38,7 +38,7 @@ data3 = [
     4.64709E+01,
     1.65901E-28
 ]
-data4 = [
+cs_avg_values = [
     2.93731E-02,
     9.87446E-02,
     -1.00000E+08,
@@ -50,7 +50,7 @@ data4 = [
     2.62479E+01,
     4.11928E-08
 ]
-data5 = [
+de_avg_values = [
     6.01602E-05,
     1.81164E+00,
     -1.00000E+08,
@@ -62,7 +62,7 @@ data5 = [
     6.21226E+01,
     1.57644E-05
 ]
-data6 = [
+pso_avg_values = [
     1.63869E-13,
     5.52171E-10,
     -9.99940E+07,
@@ -76,7 +76,7 @@ data6 = [
 ]
 
 if __name__ == "__main__":
-    stat, p = friedmanchisquare(data1, data2, data3, data4, data5, data6)
+    stat, p = friedmanchisquare(clonalg_avg_values, abc_avg_values, ba_avg_values, cs_avg_values, de_avg_values, pso_avg_values)
     print('Statistics=%.3f, p=%.3f' % (stat, p))
 
     alpha = 0.05
@@ -86,12 +86,12 @@ if __name__ == "__main__":
         print('Same distribution (fail to reject H0)')
 
     data = pd.DataFrame({
-        "Treatment1": data1,
-        "Treatment2": data2,
-        "Treatment3": data3,
-        "Treatment4": data4,
-        "Treatment5": data5,
-        "Treatment6": data6
+        "Treatment1": clonalg_avg_values,
+        "Treatment2": abc_avg_values,
+        "Treatment3": ba_avg_values,
+        "Treatment4": cs_avg_values,
+        "Treatment5": de_avg_values,
+        "Treatment6": pso_avg_values
     })
 
     result = sp.posthoc_nemenyi_friedman(data.transpose())
